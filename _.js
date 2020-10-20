@@ -35,8 +35,48 @@ const _ = {
         let hasValue = (object[key] != undefined)
         return hasValue
       },
-        
+      invert(object){
+          let invertObject = {};
+          for (let key in object) {
+              let originalValue = object[key];
+              invertObject = {originalValue: key}
+          }
+          return invertObject
+      },
+      findKey (object, predicate) {
+        for (let key in object) {
+          let value = object[key]
+              if (predicate(object[key])) {
+                return key
+              } 
+        } 
+      },
+      drop(array, n){
+          if (n === undefined) {
+              let n = 1;
+              return array.slice(n, array.length)
+          };
 
+          let dropArray = array.slice(n, array.length)
+            return dropArray 
+      },
+      dropWhile (array, predicate) {
+        const callback = (element, index) => {
+        return !predicate(element, index, array) }
+        let dropNumber = array.findIndex(callback);
+        let droppedArray = this.drop(array, dropNumber);
+        return droppedArray
+      },
+      chunk (array, size) {
+        if (size === undefined) {
+          let size = 1
+        }
+        let arrayChunks = [];
+        for (let i = 0; i<array.length; i+ size) {
+        let arrayChunk = array.slice(i, i+= size);
+            arrayChunks.push(arrayChunk)
+        } return arrayChunks;
+      }
 };
 
 
